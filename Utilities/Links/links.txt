@@ -1,0 +1,10 @@
+string to jason : 
+
+https://codebeautify.org/string-to-json-online
+
+
+Json to String : 
+https://jsontostring.com/
+
+Sample of music app player : 
+https://mupo.ir/Singer/50
