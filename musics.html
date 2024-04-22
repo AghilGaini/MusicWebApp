@@ -8,11 +8,12 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	  <script src="JsonInfo.js"></script>
 	  <script type="text/javascript">  
+	  
         $(document).ready(function(){
-			<!-- createMusics(); -->
+			<!-- CreateMusics();  -->
         });
 		
-		function createMusics()
+		function CreateMusics()
 		{
 			var musicElement =$("#musics");
 			
@@ -60,7 +61,7 @@
 				
 				var $rowText = $("<div>",{class : "row"}); 
 				var $textDiv = $("<div>",{class : "well collapse col-lg-offset-3 col-md-offset-4 col-sm-offset-0 col-xs-offset-0 CardComponent",id : "subtitle"+index});
-				var $textContent = $("<p>",{class :"card-text",text:value.Text}); 
+				var $textContent = CreateText(value.Text);
 				$rowText.append($textDiv); 
 				$textDiv.append($textContent); 
 				$cardBody.append($rowText); 
@@ -69,6 +70,33 @@
 				musicElement.append($mainRow);
 				musicElement.append("<hr />");
 			});
+		}
+		
+		function CreateText(text)
+		{
+			var persianText = text.split("<p>").filter(r=>!r.includes('<e>') && r.length > 0);
+			var englishText = text.split("<e>").filter(r=>!r.includes('<p>') && r.length > 0);
+			
+			var maxLength = persianText.length > englishText.length ? persianText.length : englishText.length;
+			
+			var $textDiv = $("<div>");
+			
+			for(i = 0;i<maxLength;i++)
+			{
+				if(englishText[i] !== undefined)
+				{
+					$englishContent = $("<p>",{class:"card-text EnText",text:englishText[i]});
+					$textDiv.append($englishContent);
+				}
+				
+				if(persianText[i] !== undefined)
+				{
+					$persianContent = $("<p>",{class:"card-text",text:persianText[i]});
+					$textDiv.append($persianContent);
+				}
+			}
+			
+			return $textDiv;
 		}
 		
 	  </script>
